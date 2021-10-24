@@ -115,11 +115,6 @@ public class SearchFragment extends Fragment {
             }
         });
 
-//        HomeViewPageAdapter adapter = new HomeViewPageAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-//        viewPager.setAdapter(adapter);
-//        viewPager.setPagingEnabled(false);
-//
-//        tabLayout.setupWithViewPager(viewPager);
         return c_view;
     }
 
