@@ -50,5 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="5dp"
         android:layout_marginTop="50dp"/>
 </FrameLayout>
