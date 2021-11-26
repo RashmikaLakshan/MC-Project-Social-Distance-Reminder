@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Statistics.InfectedAreasFragment">
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="152dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <GridLayout
         android:id="@+id/listTopics"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:rowCount="1"
         android:columnCount="4"
@@ -18,8 +22,8 @@
         <TextView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="District"
-            android:id="@+id/title"
+            android:text="Country"
+            android:id="@+id/country"
             android:layout_columnWeight="2"
             android:textSize="15dp"/>
 
@@ -27,6 +31,7 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:text="Confirmed"
+            android:id="@+id/confirmed"
             android:layout_columnWeight="1"
             android:textSize="15dp"/>
 
@@ -34,6 +39,7 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:text="Recovered"
+            android:id="@+id/recovered"
             android:layout_columnWeight="1"
             android:textSize="15dp"/>
 
@@ -41,15 +47,8 @@
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:text="Deaths"
+            android:id="@+id/deaths"
             android:layout_columnWeight="1"
             android:textSize="15dp"/>
     </GridLayout>
-
-    <ListView
-        android:id="@+id/distirctList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
-
-</FrameLayout>
+</androidx.cardview.widget.CardView>
