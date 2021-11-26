@@ -3,16 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200"
     tools:context=".fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="422dp"
+        android:layout_height="122dp"
+        android:src="@drawable/top_bar"
+        android:layout_alignParentTop="true"/>
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="notifications"
-        android:textSize="20sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"/>
+        android:textSize="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="30dp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="40dp"
+        android:elevation="20dp"
+        android:text="Health Tips"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:background="@drawable/shapes" />
 
+    <ListView
+        android:id="@+id/tipsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/textView"/>
 </RelativeLayout>
