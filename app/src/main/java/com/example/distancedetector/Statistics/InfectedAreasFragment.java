@@ -15,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.distancedetector.Activities.DistrictListAdapter;
 import com.example.distancedetector.Models.Country;
@@ -42,11 +43,11 @@ public class InfectedAreasFragment extends Fragment {
 //        this.districtsData.add(country3);
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getData();
-    }
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        getData();
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,29 +55,45 @@ public class InfectedAreasFragment extends Fragment {
         // Inflate the layout for this fragment
         c_view = inflater.inflate(R.layout.fragment_infected_areas, container, false);
 
+
         //Initialize the elements
         districtListVew = c_view.findViewById(R.id.distirctList);
 
-        //Initialize the list view
-        districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
+        //Get Data
+        getData();
 
         return c_view;
     }
 
     public void getData(){
+        System.out.println("AAAAAAAAAAAAA ------");
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this.getActivity());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,"https://jsonplaceholder.typicode.com/todos",null,new Response.Listener<JSONArray>(){
+        String API_URL = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json";
+        JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,API_URL,null,new Response.Listener<JSONObject>(){
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 try {
-                    for (int i=0;i<response.length();i++){
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        Log.d("my-api","==== "+jsonObject.getString("title"));
-                        Log.d("my-api","==== "+jsonObject.getString("userId"));
-                        Log.d("my-api","==== "+jsonObject.getString("id"));
-                        districtsData.add( new Country(Integer.parseInt(jsonObject.getString("userId")),jsonObject.getString("title"),Integer.parseInt(jsonObject.getString("id")), Integer.parseInt(jsonObject.getString("id")), Integer.parseInt(jsonObject.getString("id"))));
+                    JSONArray features = (JSONArray) response.get("features");
+                    int id, confirmed, death, recoverd;
+                    String countryName;
+                    for (int i=0;i<features.length();i++){
+                        JSONObject country = features.getJSONObject(i).getJSONObject("attributes");
+//                        Log.d("my-api","==== "+country.getString("OBJECTID"));
+//                        Log.d("my-api","==== "+country.getString("Country_Region"));
+//                        Log.d("my-api","==== "+country.getString("Confirmed"));
+//                        Log.d("my-api","==== "+country.getString("Deaths"));
+//                        Log.d("my-api","==== "+country.getString("Recovered"));
+
+                        id = Integer.parseInt(country.getString("OBJECTID"));
+                        countryName = country.getString("Country_Region");
+                        confirmed = country.getString("Confirmed") == "null" ? 0 : Integer.parseInt(country.getString("Confirmed"));
+                        recoverd = country.getString("Recovered") == "null" ? 0 : Integer.parseInt(country.getString("Recovered"));
+                        death = country.getString("Deaths") == "null" ? 0 : Integer.parseInt(country.getString("Deaths"));
+
+                        districtsData.add( new Country(id,countryName,confirmed, recoverd, death));
                     }
+                    districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
