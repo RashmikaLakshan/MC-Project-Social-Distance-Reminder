@@ -19,6 +19,7 @@ public class BluetoothScanService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        System.out.println("Statred AAAAAAAAAAAAAAAAAAA");
         this.btScanner = new BluetoothScanner(this);
         this.BTAdapter = this.btScanner.getBluetoothAdapter();
         this.btScanner.registerBluetoothReceiver();
@@ -63,7 +64,7 @@ public class BluetoothScanService extends Service {
                 this.BTAdapter.startDiscovery();
                 System.out.println("Start Discovery");
             }
-            Thread.sleep(10*1000);
+            Thread.sleep(15*1000);
 
         }
     }

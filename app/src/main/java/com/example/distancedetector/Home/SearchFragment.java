@@ -47,6 +47,11 @@ public class SearchFragment extends Fragment {
         //Initialize the elements
         scanButton = c_view.findViewById(R.id.button2);
         deviceListVew = c_view.findViewById(R.id.deviceList);
+        // only for testing
+        //START
+        Device d = new Device("1111111","Dev1", 1, 321213231);
+        detectedDevices.add(d);
+        //END
 
         //Initialize the view list
         deviceListVew.setAdapter(new DeviceListAdapter(getActivity(), R.layout.device_list_view, detectedDevices));
@@ -65,6 +70,11 @@ public class SearchFragment extends Fragment {
                     getActivity().stopService(new Intent(getActivity(), BluetoothScanService.class));
                     if(deviceSearchTread!=null){
                         deviceSearchTread.interrupt();
+//                        try {
+//                            deviceSearchTread.sleep(1000*1000);
+//                        } catch (InterruptedException e) {
+//                            e.printStackTrace();
+//                        }
                     }
 
                 }else{
@@ -82,12 +92,13 @@ public class SearchFragment extends Fragment {
                             @Override
                             public void run() {
 
-                                while (true){
+                                while (!deviceSearchTread.isInterrupted()){
                                     detectedDevices = getDetectedDeviceList();
 
                                     getActivity().runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
+                                            System.out.println("Thread running");
                                             deviceListVew.setAdapter(new DeviceListAdapter(getActivity(), R.layout.device_list_view, detectedDevices));
                                         }
                                     });
@@ -96,6 +107,7 @@ public class SearchFragment extends Fragment {
                                         Thread.sleep(10*1000);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
+                                        deviceSearchTread.interrupt();
                                     }
                                 }
 
