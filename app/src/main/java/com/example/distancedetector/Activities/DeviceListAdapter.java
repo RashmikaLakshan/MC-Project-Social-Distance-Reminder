@@ -3,6 +3,7 @@ package com.example.distancedetector.Activities;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,8 +24,10 @@ import java.util.ArrayList;
 
 public class DeviceListAdapter extends ArrayAdapter {
     ArrayList<Device> devices;
+    Context context = null;
     public DeviceListAdapter(Context context, int layout, ArrayList<Device> devices) {
         super(context, layout);
+        this.context = context;
         this.devices = devices;
     }
 
@@ -61,12 +64,23 @@ public class DeviceListAdapter extends ArrayAdapter {
 
        viewHolder.deviceName.setText(devices.get(position).getDeviceName());
        viewHolder.deviceAddress.setText(devices.get(position).getDeviceId());
-       viewHolder.distance.setText("1");
+       viewHolder.distance.setText(Double.toString(devices.get(position).getDistance()));
        if(devices.get(position).isSafeDevice()){
            viewHolder.action.setText("Safe");
+
        }else{
            viewHolder.action.setText("not");
        }
+
+        viewHolder.action.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Device selectedDevice = devices.get(position);
+                selectedDevice.setSafeDevice(!selectedDevice.isSafeDevice());
+                new LocalDB(context).updateDeviceIsSafeState(selectedDevice);
+                System.out.println(devices.get(position).getDeviceName());
+            }
+       });
 
        return row;
     }

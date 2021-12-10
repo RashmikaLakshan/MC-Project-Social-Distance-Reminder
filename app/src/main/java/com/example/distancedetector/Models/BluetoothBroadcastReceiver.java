@@ -30,6 +30,7 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         //Get action type
         String action = intent.getAction();
+        System.out.println("Action : "+action );
 
         this.isFinishedDiscovery = false;
         if (BluetoothDevice.ACTION_FOUND.equals(action)) {
