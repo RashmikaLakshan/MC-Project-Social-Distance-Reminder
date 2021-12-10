@@ -152,7 +152,7 @@ public class LocalDB extends SQLiteOpenHelper  {
 
         ArrayList<Device> deviceList = new ArrayList<Device>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_DEVICES + " WHERE " + LAST_DETECTED_AT + " > "+ time;
+        String selectQuery = "SELECT  * FROM " + TABLE_DEVICES + " WHERE " + LAST_DETECTED_AT + " > "+ time +" AND " + IS_SAFE + " = 0";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 //        db.close();
@@ -174,4 +174,33 @@ public class LocalDB extends SQLiteOpenHelper  {
 
         return deviceList;
     }
+
+    public ArrayList<Device> getTrustedDevices(){
+
+        ArrayList<Device> deviceList = new ArrayList<Device>();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_DEVICES + " WHERE " +  IS_SAFE + " = 1";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+//        db.close();
+
+        if (cursor.moveToFirst()) {
+            do {
+                Device device = new Device(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        Integer.parseInt(cursor.getString(2)),
+                        cursor.getLong(3),
+                        Double.parseDouble(cursor.getString(4))
+                );
+
+                // Adding contact to list
+                deviceList.add(device);
+            } while (cursor.moveToNext());
+        }
+
+        return deviceList;
+    }
+
+
 }
