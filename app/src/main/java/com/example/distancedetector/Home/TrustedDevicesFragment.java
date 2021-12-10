@@ -36,10 +36,10 @@ public class TrustedDevicesFragment extends Fragment {
 
         trustedDevicesListView = c_view.findViewById(R.id.trustedDeviceList);
 
-        Device d = new Device("1111111","Dev1", 1, 321213231);
-        Device e = new Device("1111131","Dev1", 1, 321213231);
-        trustedDevices.add(d);
-        trustedDevices.add(e);
+//        Device d = new Device("1111111","Dev1", 1, 321213231);
+//        Device e = new Device("1111131","Dev1", 1, 321213231);
+//        trustedDevices.add(d);
+//        trustedDevices.add(e);
         trustedDevicesListView.setAdapter(new DeviceListAdapter(getActivity(),R.layout.device_list_view,trustedDevices));
 
         trustedDeviceThread = new Thread(){

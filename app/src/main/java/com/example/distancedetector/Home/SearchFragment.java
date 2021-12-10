@@ -49,8 +49,8 @@ public class SearchFragment extends Fragment {
         deviceListVew = c_view.findViewById(R.id.deviceList);
         // only for testing
         //START
-        Device d = new Device("1111111","Dev1", 1, 321213231);
-        detectedDevices.add(d);
+//        Device d = new Device("1111111","Dev1", 1, 321213231);
+//        detectedDevices.add(d);
         //END
 
         //Initialize the view list
