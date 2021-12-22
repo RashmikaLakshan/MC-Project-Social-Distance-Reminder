@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/purple_200"
+    android:background="@color/white"
     tools:context=".fragments.HomeFragment">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginLeft="10dp"
         android:includeFontPadding="true"
         android:text="COVID 19"
-        android:textColor="@color/white"
+        android:textColor="@color/pink"
         android:textFontWeight="800"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,10 +28,11 @@
         android:layout_height="150dp"
         android:id="@+id/summaryView"
         android:orientation="vertical"
+        android:paddingHorizontal="5dp"
         android:layout_marginBottom="10dp"
         android:layout_below="@+id/textView"
         android:layout_marginHorizontal="8dp"
-        android:background="@color/white">
+        android:background="@drawable/custom">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
