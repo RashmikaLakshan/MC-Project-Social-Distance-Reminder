@@ -22,12 +22,24 @@ public class NotificationFragment extends Fragment {
     private ArrayList<HealthTips> tipsData = new ArrayList<HealthTips>();
 
     public NotificationFragment() {
-        HealthTips tip1 = new HealthTips(1, "Wash your Hands", R.drawable.handwash);
-        HealthTips tip2 = new HealthTips(2, "keep distance from your unsafe", R.drawable.covid);
-        HealthTips tip3 = new HealthTips(3, "third notification", R.drawable.handwash);
+        HealthTips tip1 = new HealthTips(1, "Get Vaccinated", R.drawable.image1);
+        HealthTips tip2 = new HealthTips(2, "Wear a mask", R.drawable.image2);
+        HealthTips tip3 = new HealthTips(3, "Stay 6 feet away from others", R.drawable.image3);
+        HealthTips tip4 = new HealthTips(1, "Avoid crowds and poorly ventilated spaces", R.drawable.image4);
+        HealthTips tip5 = new HealthTips(2, "Test to prevent spread to others", R.drawable.image5);
+        HealthTips tip6 = new HealthTips(3, "Wash your hands often", R.drawable.image6);
+        HealthTips tip7 = new HealthTips(1, "Cover coughs and sneezes", R.drawable.image7);
+        HealthTips tip8 = new HealthTips(2, "Clean and disinfect", R.drawable.image8);
+        HealthTips tip9 = new HealthTips(3, "Monitor your health daily", R.drawable.image9);
         tipsData.add(tip1);
         tipsData.add(tip2);
         tipsData.add(tip3);
+        tipsData.add(tip4);
+        tipsData.add(tip5);
+        tipsData.add(tip6);
+        tipsData.add(tip7);
+        tipsData.add(tip8);
+        tipsData.add(tip9);
     }
 
     @Override

@@ -139,6 +139,8 @@ public class LocalDB extends SQLiteOpenHelper  {
         ContentValues values = new ContentValues();
 
         values.put(LAST_DETECTED_AT, device.getLastDetected());
+        values.put(DISTANCE, device.getDistance());
+
 
         int state = db.update(TABLE_DEVICES, values, ID + " = ?",
                 new String[] { String.valueOf(device.getDeviceId()) });
@@ -152,7 +154,7 @@ public class LocalDB extends SQLiteOpenHelper  {
 
         ArrayList<Device> deviceList = new ArrayList<Device>();
 
-        String selectQuery = "SELECT  * FROM " + TABLE_DEVICES + " WHERE " + LAST_DETECTED_AT + " > "+ time +" AND " + IS_SAFE + " = 0";
+        String selectQuery = "SELECT  * FROM " + TABLE_DEVICES + " WHERE " + LAST_DETECTED_AT + " > "+ time +" AND " + IS_SAFE + " = 0 ORDER BY " + DISTANCE + " ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 //        db.close();
