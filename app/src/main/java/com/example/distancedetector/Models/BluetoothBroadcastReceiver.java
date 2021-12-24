@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
+import android.os.Vibrator;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -42,7 +43,8 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             //Save detected Device
             Device savedDevice = saveDeviceDetails2LocalStorage(context, device, rssi);
             //Notify users
-            notifyUser(savedDevice);
+            notifyUser(context, savedDevice);
+
         }
 
         if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
@@ -67,8 +69,11 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
 
 
         Device device = new Device(BTdevice.getAddress(), BTdevice.getName(), 0, stimestamp);
-        double distance = distanceCalculator.calculateDistance(rssi);
+        double distance = distanceCalculator.calculateDistance(context, rssi, BTdevice.getAddress());
+
         device.setDistance(distance);
+        System.out.println("CALCULATE: RSSI: "+ device.getRSSI() + " DISTANCE: "+device.getDistance());
+
 
         try{
             db.addDevices(device);
@@ -87,13 +92,26 @@ public class BluetoothBroadcastReceiver extends BroadcastReceiver {
             device.setLastDetected(lastDetect);
         }
 
+        device.setRSSI(rssi);
+        device.setDistance(distance);
+
+        System.out.println("CALCULATE: RSSI: "+ device.getRSSI() + " DISTANCE: "+device.getDistance());
+
         return device;
     }
 
-    public void notifyUser(Device device){
+    public void notifyUser(Context context, Device device){
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null && vibrator.hasVibrator() && !device.isSafeDevice() ) {
+            System.out.println("HAS VIBRATOR");
+            if(device.getDistance()==2){
+                vibrator.vibrate(500);
+            }else if (device.getDistance()==1 || device.getDistance()==0){
+                long[] mVibratePattern = new long[]{0, 400, 200, 400};
+                vibrator.vibrate(mVibratePattern, -1);
+            }
 
-        //TODO notify user
-
+        }
     }
 
     public boolean getIsFinishedDiscovery(){

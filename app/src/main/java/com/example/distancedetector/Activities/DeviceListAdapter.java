@@ -1,12 +1,14 @@
 package com.example.distancedetector.Activities;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,7 @@ public class DeviceListAdapter extends ArrayAdapter {
         TextView deviceAddress;
         TextView distance;
         Button action;
+        LinearLayout singleRow;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class DeviceListAdapter extends ArrayAdapter {
            viewHolder.deviceAddress = row.findViewById(R.id.deviceAddress);
            viewHolder.distance = row.findViewById(R.id.distance);
            viewHolder.action = row.findViewById(R.id.action);
+           viewHolder.singleRow = row.findViewById(R.id.row_index_key);
            row.setTag(viewHolder);
        }else{
            viewHolder = (ViewHolder)row.getTag();
@@ -66,10 +70,20 @@ public class DeviceListAdapter extends ArrayAdapter {
        viewHolder.deviceAddress.setText(devices.get(position).getDeviceId());
        viewHolder.distance.setText(Double.toString(devices.get(position).getDistance()));
        if(devices.get(position).isSafeDevice()){
-           viewHolder.action.setText("Safe");
+           viewHolder.action.setText("untrusted");
 
        }else{
-           viewHolder.action.setText("not");
+           viewHolder.action.setText("trusted");
+       }
+
+       if(devices.get(position).getDistance()==1 || devices.get(position).getDistance()==0){
+           viewHolder.singleRow.setBackgroundColor(Color.argb(120,255,0,0));
+       }else if(devices.get(position).getDistance()==2){
+            viewHolder.singleRow.setBackgroundColor(Color.argb(120,255,165,0));
+        }else if(devices.get(position).getDistance()==3){
+           viewHolder.singleRow.setBackgroundColor(Color.argb(120,255,255,0));
+       }else{
+           viewHolder.singleRow.setBackgroundColor(Color.argb(120,0,255,0));
        }
 
         viewHolder.action.setOnClickListener(new View.OnClickListener(){
