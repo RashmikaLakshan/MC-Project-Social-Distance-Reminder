@@ -47,14 +47,14 @@ public class InfectedAreasFragment extends Fragment {
         //Get Data
 //        getData();
         districtsData.clear();
-        districtsData.add(new Country(1, "Gampaha",370,1,0));
-        districtsData.add(new Country(1, "Colombo",160,2,0));
-        districtsData.add(new Country(1, "Kalutara",65,0,1));
-        districtsData.add(new Country(1, "Puttalam",41,4,1));
+        districtsData.add(new Country(1, "Gampaha",220,17,4));
+        districtsData.add(new Country(1, "Colombo",112,16,3));
+        districtsData.add(new Country(1, "Kalutara",52,9,1));
+        districtsData.add(new Country(1, "Puttalam",36,4,1));
         districtsData.add(new Country(1, "Kurunagala",27,1,0));
         districtsData.add(new Country(1, "Jaffna",16,2,2));
-        districtsData.add(new Country(1, "Kandy",15,2,0));
-        districtsData.add(new Country(1, "Anuradhapura",12,3,0));
+        districtsData.add(new Country(1, "Kandy",12,2,0));
+        districtsData.add(new Country(1, "Anuradhapura",11,3,0));
         districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
 
         return c_view;
