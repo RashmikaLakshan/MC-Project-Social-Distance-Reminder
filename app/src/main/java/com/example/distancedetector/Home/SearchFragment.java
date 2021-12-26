@@ -41,7 +41,6 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        detectedDevices.add(new Device("FC:42:03:AA:64:23", "RedmiNova2i",0,5L,2));
 
         // Inflate the layout for this fragment
         c_view = inflater.inflate(R.layout.fragment_search, container, false);
@@ -101,7 +100,7 @@ public class SearchFragment extends Fragment {
                                     });
 
                                     try {
-                                        Thread.sleep(10*1000);
+                                        Thread.sleep(2*1000);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                         deviceSearchTread.interrupt();

@@ -69,9 +69,9 @@ public class DeviceListAdapter extends ArrayAdapter {
 
        viewHolder.deviceName.setText(devices.get(position).getDeviceName());
        viewHolder.deviceAddress.setText(devices.get(position).getDeviceId());
-       viewHolder.distance.setText(Double.toString(devices.get(position).getDistance()));
+       viewHolder.distance.setText(Double.toString(devices.get(position).getDistance())+"m");
        if(devices.get(position).isSafeDevice()){
-           viewHolder.action.setText("untrusted");
+           viewHolder.action.setText("unsafe");
 
        }else{
            viewHolder.action.setText("trusted");

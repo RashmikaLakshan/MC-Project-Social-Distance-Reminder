@@ -90,7 +90,7 @@ public class WorldStatusFragment extends Fragment {
                         id = Integer.parseInt(country.getString("OBJECTID"));
                         countryName = country.getString("Country_Region");
                         confirmed = country.getString("Confirmed") == "null" ? 0 : Integer.parseInt(country.getString("Confirmed"));
-                        recoverd = country.getString("Recovered") == "null" ? 0 : Integer.parseInt(country.getString("Recovered"));
+                        recoverd = country.getString("Recovered") == "null" ? Integer.parseInt(country.getString("Confirmed")) - Integer.parseInt(country.getString("Deaths")) : Integer.parseInt(country.getString("Recovered"));
                         death = country.getString("Deaths") == "null" ? 0 : Integer.parseInt(country.getString("Deaths"));
 
                         countriesData.add( new Country(id,countryName,confirmed, recoverd, death));

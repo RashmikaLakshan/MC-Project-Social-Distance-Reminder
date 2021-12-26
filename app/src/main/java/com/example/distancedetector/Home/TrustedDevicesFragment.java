@@ -47,6 +47,10 @@ public class TrustedDevicesFragment extends Fragment {
                       @Override
                       public void run() {
                           trustedDevices = new LocalDB(getActivity()).getTrustedDevices();
+                          trustedDevices.add(new Device("FC:42:03:AA:64:23", "RedmiNova2i",1,5L,1));
+                          trustedDevices.add(new Device("BC:AE:4F:FB:23:3A", "RedmiNote8",1,5L,2));
+                          trustedDevices.add(new Device("CC:CB:FA:DE:16:CC", "SamsungJ2",1,5L,3));
+                          trustedDevices.add(new Device("EF:08:2D:10:AE:BF", "SamsungJ7",1,5L,5));
                           System.out.println("Trusted device thread running size: "+trustedDevices.size());
                           trustedDevicesListView.setAdapter(new DeviceListAdapter(getActivity(),R.layout.device_list_view,trustedDevices));
                       }

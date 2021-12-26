@@ -32,22 +32,7 @@ public class InfectedAreasFragment extends Fragment {
     private ListView districtListVew;
     private ArrayList<Country> districtsData = new ArrayList<Country>();
 
-    public InfectedAreasFragment() {
-//        //testinggggggg
-//        Country country1 = new Country(1, "Galle", 2000, 1200, 30);
-//        Country country2 = new Country(1, "Matara", 560, 328, 9);
-//        Country country3 = new Country(1, "Hambantota", 483, 562, 61);
-//
-//        this.districtsData.add(country1);
-//        this.districtsData.add(country2);
-//        this.districtsData.add(country3);
-    }
-
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        getData();
-//    }
+    public InfectedAreasFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +45,17 @@ public class InfectedAreasFragment extends Fragment {
         districtListVew = c_view.findViewById(R.id.distirctList);
 
         //Get Data
-        getData();
+//        getData();
+        districtsData.clear();
+        districtsData.add(new Country(1, "Gampaha",370,1,0));
+        districtsData.add(new Country(1, "Colombo",160,2,0));
+        districtsData.add(new Country(1, "Kalutara",65,0,1));
+        districtsData.add(new Country(1, "Puttalam",41,4,1));
+        districtsData.add(new Country(1, "Kurunagala",27,1,0));
+        districtsData.add(new Country(1, "Jaffna",16,2,2));
+        districtsData.add(new Country(1, "Kandy",15,2,0));
+        districtsData.add(new Country(1, "Anuradhapura",12,3,0));
+        districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
 
         return c_view;
     }
