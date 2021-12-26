@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 
 import com.example.distancedetector.Models.*;
 import com.example.distancedetector.R;
@@ -38,7 +39,7 @@ public class DeviceListAdapter extends ArrayAdapter {
         TextView deviceAddress;
         TextView distance;
         Button action;
-        LinearLayout singleRow;
+        CardView singleRow;
     }
 
     @Override
