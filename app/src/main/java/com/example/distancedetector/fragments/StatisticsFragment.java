@@ -57,7 +57,10 @@ public class StatisticsFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        getData();
+//        getData();
+        confirmView.setText("529");
+        activeView.setText("9329");
+        deathView.setText("19");
 
         return c_view;
     }
