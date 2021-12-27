@@ -36,6 +36,9 @@ public class StatisticsFragment extends Fragment {
 
     public StatisticsFragment() {
         // Required empty public constructor
+//        confirmView.setText("confirmCount");
+//        activeView.setText("ActiveCount");
+//        deathView.setText("DeathCount");
     }
 
     @Override
@@ -57,10 +60,7 @@ public class StatisticsFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-//        getData();
-        confirmView.setText("529");
-        activeView.setText("9329");
-        deathView.setText("19");
+        getData();
 
         return c_view;
     }

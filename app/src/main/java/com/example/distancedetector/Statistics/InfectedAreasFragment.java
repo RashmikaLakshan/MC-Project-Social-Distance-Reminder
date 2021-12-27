@@ -31,8 +31,18 @@ public class InfectedAreasFragment extends Fragment {
     private View c_view;
     private ListView districtListVew;
     private ArrayList<Country> districtsData = new ArrayList<Country>();
-
-    public InfectedAreasFragment() {}
+//    public InfectedAreasFragment() {
+//        districtsData.clear();
+//        districtsData.add(new Country(1, "Colombo",124,6,5));
+//        districtsData.add(new Country(1, "Gampaha",113,4,0));
+//        districtsData.add(new Country(1, "Jaffna",18,1,2));
+//        districtsData.add(new Country(1, "Galle",15,0,1));
+//        districtsData.add(new Country(1, "Badulla",13,4,2));
+//        districtsData.add(new Country(1, "Kurunagala",13,1,0));
+//        districtsData.add(new Country(1, "Puttalam",10,2,1));
+//        districtsData.add(new Country(1, "Kandy",8,3,0));
+//        districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,48 +55,32 @@ public class InfectedAreasFragment extends Fragment {
         districtListVew = c_view.findViewById(R.id.distirctList);
 
         //Get Data
-//        getData();
-        districtsData.clear();
-        districtsData.add(new Country(1, "Gampaha",220,17,4));
-        districtsData.add(new Country(1, "Colombo",112,16,3));
-        districtsData.add(new Country(1, "Kalutara",52,9,1));
-        districtsData.add(new Country(1, "Puttalam",36,4,1));
-        districtsData.add(new Country(1, "Kurunagala",27,1,0));
-        districtsData.add(new Country(1, "Jaffna",16,2,2));
-        districtsData.add(new Country(1, "Kandy",12,2,0));
-        districtsData.add(new Country(1, "Anuradhapura",11,3,0));
-        districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
+        getData();
 
         return c_view;
     }
 
     public void getData(){
-        System.out.println("AAAAAAAAAAAAA ------");
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this.getActivity());
-        String API_URL = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json";
+        String API_URL = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/localdata/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json";
         JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(Request.Method.GET,API_URL,null,new Response.Listener<JSONObject>(){
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray features = (JSONArray) response.get("features");
                     int id, confirmed, death, recoverd;
-                    String countryName;
+                    String districtName;
                     for (int i=0;i<features.length();i++){
                         JSONObject country = features.getJSONObject(i).getJSONObject("attributes");
-//                        Log.d("my-api","==== "+country.getString("OBJECTID"));
-//                        Log.d("my-api","==== "+country.getString("Country_Region"));
-//                        Log.d("my-api","==== "+country.getString("Confirmed"));
-//                        Log.d("my-api","==== "+country.getString("Deaths"));
-//                        Log.d("my-api","==== "+country.getString("Recovered"));
 
                         id = Integer.parseInt(country.getString("OBJECTID"));
-                        countryName = country.getString("Country_Region");
+                        districtName = country.getString("district");
                         confirmed = country.getString("Confirmed") == "null" ? 0 : Integer.parseInt(country.getString("Confirmed"));
                         recoverd = country.getString("Recovered") == "null" ? 0 : Integer.parseInt(country.getString("Recovered"));
                         death = country.getString("Deaths") == "null" ? 0 : Integer.parseInt(country.getString("Deaths"));
 
-                        districtsData.add( new Country(id,countryName,confirmed, recoverd, death));
+                        districtsData.add( new Country(id,districtName,confirmed, recoverd, death));
                     }
                     districtListVew.setAdapter(new DistrictListAdapter(getActivity(), R.layout.district_list_view, districtsData));
                 }catch (Exception e){
